@@ -42,11 +42,11 @@ In this setup, locomotion and manipulation with the same configuration are train
 
 - Trained agents with horizontal robot configuration (left: MLP Policy; Right: GNN Policy): 
 
-  <img src="assets/horizontal_cotrain.gif" height="400" /> <img src="assets/horizontal_cotrain_graph.gif" height="400" />
+  <img src="assets/horizontal_cotrain.gif" height="200" /> <img src="assets/horizontal_cotrain_graph.gif" height="200" />
 
 - Trained agents with vertical robot configuration:
 
-  <img src="assets/vertical_cotrain.gif" height="500" /> <img src="assets/vertical_cotrain_graph.gif" height="500" />
+  <img src="assets/vertical_cotrain.gif" height="300" /> <img src="assets/vertical_cotrain_graph.gif" height="300" />
 
 # Sim2Real Transferability
 
