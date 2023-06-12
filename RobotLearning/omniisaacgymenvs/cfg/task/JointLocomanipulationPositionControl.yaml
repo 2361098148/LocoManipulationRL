@@ -1,0 +1,232 @@
+# used to create the object
+name: JointLocomanipulationPositionControl
+
+physics_engine: ${..physics_engine}
+
+# if given, will override the device setting in gym. 
+env:
+  numEnvs: ${resolve_default:1,${...num_envs}}
+  envSpacing: 1.0
+
+  clipObservations: 5.0
+  clipActions: 1.0
+  controlFrequencyInv: 1 # 240
+
+sim:
+
+  # Default values: 
+  dt: 0.00417 # 1/240 s
+  max_episode_length: 300
+  use_gpu_pipeline: ${eq:${...pipeline},"gpu"}
+  gravity: [0.0, 0.0, -9.81]
+  add_ground_plane: True
+  use_flatcache: True
+  enable_scene_query_support: False
+  disable_contact_processing: False
+
+  # set to True if you use camera sensors in the environment
+  enable_cameras: False
+
+  default_physics_material:
+    static_friction: 1.0
+    dynamic_friction: 1.0
+    restitution: 0.0
+
+  physx:
+    worker_thread_count: ${....num_threads}
+    solver_type: ${....solver_type}
+    # use_gpu: False
+    use_gpu: ${eq:${....sim_device},"gpu"} # set to False to run on CPU
+    solver_position_iteration_count: 4
+    solver_velocity_iteration_count: 1
+    contact_offset: 0.005
+    rest_offset: 0.0
+    bounce_threshold_velocity: 0.2
+    friction_offset_threshold: 0.04
+    friction_correlation_distance: 0.025
+    enable_sleeping: True
+    enable_stabilization: True
+    max_depenetration_velocity: 100.0
+
+    # GPU buffers
+    gpu_max_rigid_contact_count: 2278850  # 2229090 # 1197868 
+    gpu_max_rigid_patch_count: 667648 # 667648 # 393216
+    gpu_found_lost_pairs_capacity: 8192
+    gpu_found_lost_aggregate_pairs_capacity: 989792 # 524288 # 989792 # 524288
+    gpu_total_aggregate_pairs_capacity: 1048576
+    gpu_max_soft_body_contacts: 1048576
+    gpu_max_particle_contacts: 1048576
+    gpu_heap_capacity: 33554432
+    gpu_temp_buffer_capacity: 16777216
+    gpu_max_num_partitions: 8
+
+  Quadruped:
+    # -1 to use default values
+    override_usd_defaults: False
+    fixed_base: False
+    enable_self_collisions: False
+    enable_gyroscopic_forces: True
+    # also in stage params
+    # per-actor
+    solver_position_iteration_count: 4
+    solver_velocity_iteration_count: 1
+    sleep_threshold: 0.0
+    stabilization_threshold: 0.001
+    # per-body
+    density: -1
+    max_depenetration_velocity: 100.0
+    # per-shape
+    contact_offset: 0.005
+    rest_offset: 0.0
+
+  QuadrupedFixed:
+    # -1 to use default values
+    override_usd_defaults: False
+    fixed_base: False
+    enable_self_collisions: False
+    enable_gyroscopic_forces: True
+    # also in stage params
+    # per-actor
+    solver_position_iteration_count: 4
+    solver_velocity_iteration_count: 1
+    sleep_threshold: 0.0
+    stabilization_threshold: 0.001
+    # per-body
+    density: -1
+    max_depenetration_velocity: 100.0
+    # per-shape
+    contact_offset: 0.005
+    rest_offset: 0.0
+
+  plate:
+    # -1 to use default values
+    override_usd_defaults: False
+    fixed_base: False
+    enable_self_collisions: False
+    enable_gyroscopic_forces: True
+    # also in stage params
+    # per-actor
+    solver_position_iteration_count: 4
+    solver_velocity_iteration_count: 1
+    sleep_threshold: 0.0
+    stabilization_threshold: 0.001
+    # per-body
+    density: -1
+    max_depenetration_velocity: 100.0
+    # per-shape
+    contact_offset: 0.005
+    rest_offset: 0.0
+
+  pose_indicator_loco:
+    # -1 to use default values
+    override_usd_defaults: False
+    fixed_base: False
+    enable_self_collisions: False
+    enable_gyroscopic_forces: False
+    # also in stage params
+    # per-actor
+    solver_position_iteration_count: 4
+    solver_velocity_iteration_count: 1
+    sleep_threshold: 0.005
+    stabilization_threshold: 0.001
+    # per-body
+    density: -1
+    max_depenetration_velocity: 100.0
+    # per-shape
+    contact_offset: 0.001
+    rest_offset: 0.001
+
+  pose_indicator_mani:
+    # -1 to use default values
+    override_usd_defaults: False
+    fixed_base: False
+    enable_self_collisions: False
+    enable_gyroscopic_forces: False
+    # also in stage params
+    # per-actor
+    solver_position_iteration_count: 4
+    solver_velocity_iteration_count: 1
+    sleep_threshold: 0.005
+    stabilization_threshold: 0.001
+    # per-body
+    density: -1
+    max_depenetration_velocity: 100.0
+    # per-shape
+    contact_offset: 0.001
+    rest_offset: 0.001
+
+domain_randomization:
+  # Randomization parameters:
+    # Observation and actions (not checked)
+    # TODO: Friction coefficient between robot and the ground (not working)
+    # TODO: Stiffness and damping of the actuators
+    # Maximum effort of the actuators (checked; working)
+    # Maximum joint velocities of the actuators (checked; working)
+    # Gravity of the evnvironment (checked; working)
+    # Scale of the robot (checked; but not scaling the entire robot?)
+    # Random forces acting on the baselink (checked; working)
+  min_frequency: 400
+  randomize: False
+  randomization_params:
+    # Observations and actions
+    observations:
+      on_reset:
+        operation: "additive"
+        distribution: "gaussian"
+        distribution_parameters: [0, .001]
+      on_interval:
+        frequency_interval: 1
+        operation: "additive"
+        distribution: "gaussian"
+        distribution_parameters: [0, .02]
+    actions:
+      on_reset:
+        operation: "additive"
+        distribution: "gaussian"
+        distribution_parameters: [0, 0.015]
+      on_interval:
+        frequency_interval: 1
+        operation: "additive"
+        distribution: "gaussian"
+        distribution_parameters: [0., 0.01]
+
+    # Gravity of the environment
+    simulation:
+      gravity:
+        on_interval:
+          frequency_interval: 400
+          operation: "additive"
+          distribution: "gaussian"
+          distribution_parameters: [[0.0, 0.0, 0.0], [0.1, 0.1, 0.5]]        
+    
+    rigid_prim_views:
+      baselink_view:
+        force:
+          on_interval:
+            frequency_interval: 1
+            operation: "direct"
+            distribution: "gaussian"
+            distribution_parameters: [[0, 0, 0], [5, 5, 5]]
+
+    articulation_views:
+      robot_view:
+        joint_max_velocities:
+          on_interval:
+            frequency_interval: 1
+            operation: "scaling"
+            distribution: "uniform"
+            distribution_parameters: [0.95, 1.05]
+        max_efforts:
+          on_interval:
+            frequency_interval: 1
+            operation: "scaling"
+            distribution: "uniform"
+            distribution_parameters: [0.7, 0.9]
+        scale:
+          on_startup:
+            operation: "scaling"
+            distribution: "uniform"
+            distribution_parameters: [0.98, 1.02]
+
+
+

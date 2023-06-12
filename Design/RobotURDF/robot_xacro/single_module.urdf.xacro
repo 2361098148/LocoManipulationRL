@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="overconstrained_gripper">
+    <!--Import parts from xacro file-->
+    <xacro:include filename="../module/overconstrained_module_closed_left.urdf.xacro"/>
+
+    <link name="base"/>
+
+    <xacro:module_overconstrained_left module_prefix="a" parent_link="base">
+        <origin xyz="0 0 0" rpy="${PI} 0 ${PI/-2.0}"/>
+    </xacro:module_overconstrained_left>
+
+</robot>

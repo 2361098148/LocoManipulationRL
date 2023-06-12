@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="right_module_with_support">
+    <!--Import parts from xacro file-->
+    <xacro:include filename="../module/overconstrained_module.xacro"/>
+
+    <link name="base"/>
+
+    <link name="carbon_tube_support">
+        <inertial>
+            <origin xyz="-6e-10 -0.0011925937 0.0754592325" rpy="0 0 0"/>
+            <mass value="0.024812705"/>
+            <inertia ixx="9.67536e-05" iyy="9.25491e-05"
+ 			        izz="6.5793e-06" ixy="0.0"
+ 			        iyz="-8.2222e-06" ixz="-0.0"/>
+        </inertial>
+         <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 {PI} 0.0"/>
+            <geometry>
+                <mesh filename="${root_folder}/mesh/visual/frames/carbon_tube_support.obj" scale="${scale}"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 {PI} 0.0"/>
+            <geometry>
+                <mesh filename="${root_folder}/mesh/collision/frames/carbon_tube_support.obj" scale="${scale}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="fix_support" type="fixed">
+        <origin xyz="0.0 -0.03525 -0.035" rpy="0.0 0.0 0.0"/>
+        <parent link="base"/>
+        <child link="carbon_tube_support"/>
+    </joint>
+
+    <xacro:module_overconstrained_right module_prefix="a" parent_link="base">
+        <origin xyz="0 0 0" rpy="${PI} 0 ${PI}"/>
+    </xacro:module_overconstrained_right>
+
+</robot>

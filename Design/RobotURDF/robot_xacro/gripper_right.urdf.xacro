@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="overconstrained_gripper">
+    <!--Import parts from xacro file-->
+    <xacro:include filename="../module/overconstrained_module.xacro"/>
+
+    <xacro:property name="radius" value="0.1"/>
+
+    <link name="gripper_base">
+        <inertial>
+            <origin xyz="0 0 0.004" rpy="0 0 0"/>
+            <mass value="0.2"/>
+            <inertia ixx="0.001" iyy="0.001"
+                izz="0.001" ixy="0.0"
+                iyz="0.0" ixz="0.0"/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.785"/>
+            <geometry>
+                <mesh filename="./mesh/frames/gripper_vertical.obj" scale="${scale}"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.785"/>
+            <geometry>
+                <mesh filename="./mesh/frames/gripper_vertical.obj" scale="${scale}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-->
+                module 4
+
+       module1  . origin  module 3
+
+                 module 2
+    <-->
+
+    <xacro:module_overconstrained_right module_prefix="a1" parent_link="gripper_base">
+        <origin xyz="${-1*radius} 0 0" rpy="${PI} 0 ${PI/-2.0}"/>
+    </xacro:module_overconstrained_right>
+
+    <xacro:module_overconstrained_left module_prefix="a2"  parent_link="gripper_base">
+        <origin xyz="0 ${-1*radius} 0" rpy="${PI} 0 0"/>
+    </xacro:module_overconstrained_left>
+
+    <xacro:module_overconstrained_left module_prefix="a3"  parent_link="gripper_base">
+        <origin xyz="${radius} 0 0" rpy="${PI} 0 ${PI/2.0}"/>
+    </xacro:module_overconstrained_left>
+
+    <xacro:module_overconstrained_left module_prefix="a4"  parent_link="gripper_base">
+        <origin xyz="0 ${radius} 0" rpy="${PI} 0 ${PI}"/>
+    </xacro:module_overconstrained_left>
+
+</robot>

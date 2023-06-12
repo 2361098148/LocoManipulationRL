@@ -1,0 +1,328 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "United Quadruped Pose Control",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/rlgames_train.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "task=UnitedQuadrupedPoseControlOmni",
+                "num_envs=2",
+                "headless=false",
+                "test=true",
+                "experiment=0515-32iter",
+                "checkpoint=./runs/SKRL-UnitedQuadrupedPoseControlOmni/0515-test_skrl/checkpoints/best_agent.pt",
+                // "pipeline=cuda",
+                // "sim_device=cuda:0",
+                // "rl_device=cuda:0"
+            ]
+        },
+
+        {
+            "name": "United Quadruped Manipulate Plate",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/rlgames_train.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "task=UnitedQuadrupedManipulatePlateOmni",
+                "num_envs=512",
+                "headless=true",
+                "test=True",
+                "experiment=test",
+                "checkpoint=./runs/UnitedQuadrupedPoseControlOmni/0515-add_link_contact_reset/nn/0515-add_link_contact_reset.pth",
+                // "pipeline=cuda"
+            ]
+        },
+
+        {
+            "name": "United Quadruped Manipulate Plate Inverted",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/rlgames_train.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "task=UnitedQuadrupedManipulatePlateInvertedOmni",
+                "num_envs=512",
+                "headless=true",
+                "test=True",
+                // "experiment=test",
+                "checkpoint=./runs/UnitedQuadrupedPoseControlOmni/0515-add_link_contact_reset/nn/0515-add_link_contact_reset.pth",
+            ]
+        },
+
+        {
+            "name": "SKRL - United Quadruped Pose Control",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_locomotion.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=500",
+                "headless=true",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "SKRL - United Quadruped Manipulation",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_manipulation.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1000",
+                "headless=true",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "SKRL - Joint Locomanipulation",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_locomanipulation.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=2",
+                "headless=true",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "SKRL - Quadruped Pose Control Vertical",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_locomotion_vertical.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=false",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "SKRL - Quadruped Manipulate Plate Vertical",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_manipulation_vertical.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=false",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "SKRL - Joint Locomanipulation Vertical",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_locomanipulation_vertical.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=2",
+                "headless=false",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "Free Fall Load",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/free_fall_load.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=false",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "Vel Sin Load",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/vel_sin_load.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=true",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "Pos Sin Load",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/pos_sin_load.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=true",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "SKRL Quadruped Pose Control Custom Controller",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_locomotion_custom_controller.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=false",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "SKRL Quadruped Manipulate Plate Custom Controller",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_manipulation_custom_controller.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=2",
+                "headless=false",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "SKRL Quadruped Manipulate Plate Sim2Real",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_locomotion_custom_controller_dr.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=false",
+                // "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "Replay Quadruped Motions",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/replay_quadruped_motions.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=false",
+                "pipeline=cpu",
+                // "sim_device=cpu",
+                // "rl_device=cuda"
+            ]
+        },
+
+        {
+            "name": "SKRL - Quadruped Manipulate Plate Position Control",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_manipulation_position_control.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=false",
+            ]
+        },
+
+        {
+            "name": "SKRL - Quadruped Pose Control Position Control",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_locomotion_position_control.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=1",
+                "headless=false",
+            ]
+        },
+
+        {
+            "name": "SKRL - Joint Locomanipulation Position Control",
+            "python": "python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/skrl_ppo_locomanipulation_position_control.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "num_envs=2",
+                "headless=false",
+            ]
+        },
+    ]
+}

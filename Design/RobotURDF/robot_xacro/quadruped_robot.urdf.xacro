@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="quadruped_robot">
+    <xacro:include filename="../module/overconstrained_module.xacro"/>
+
+    <link name="quadruped_frame">
+        <visual>
+            <geometry>
+                <mesh filename="./mesh/visual/frames/quadruped_horizontal.obj" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <geometry>
+                <mesh filename="./mesh/visual/frames/quadruped_horizontal.obj" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value="0.1993557037"/>
+            <origin xyz="0 0 -0.0002889412"/>
+           <inertia ixx="0.0029510715" iyy="0.0004986724"
+                    izz="0.0030511616" ixy="0.0"
+                    iyz="-0.0" ixz="-2e-10"/>
+        </inertial>
+    </link>
+
+    <xacro:module_overconstrained_left module_prefix="a1" parent_link="quadruped_frame">
+        <origin xyz="-0.03875 -0.0025 0" rpy="${PI/2.0} ${-5.0*PI/4.0} ${PI}"/>
+    </xacro:module_overconstrained_left>
+
+    <xacro:module_overconstrained_left module_prefix="a3" parent_link="quadruped_frame">
+        <origin xyz="-0.03875 0.0025 0" rpy="${PI/2.0} ${-3.0*PI/4.0} 0"/>
+    </xacro:module_overconstrained_left>
+
+    <xacro:module_overconstrained_right module_prefix="a2" parent_link="quadruped_frame">
+        <origin xyz="0.03875 -0.0025 0" rpy="${PI/2.0} ${5.0*PI/4.0} ${PI}"/>
+    </xacro:module_overconstrained_right>
+
+    <xacro:module_overconstrained_right module_prefix="a4" parent_link="quadruped_frame">
+        <origin xyz="0.03875 0.0025 0" rpy="${PI/2.0} ${3.0*PI/4.0} 0"/>
+    </xacro:module_overconstrained_right>
+
+</robot>

@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="overconstrained_parts">
+    <xacro:property name="root_folder" value=".."/>
+    <xacro:property name="scale" value="0.001 0.001 0.001"/>
+    <xacro:property name="PI" value="3.14159265"/>
+    <xacro:property name="link_type" value="overconstrained"/>
+
+    <!--Inertial Information for each part-->
+    <xacro:macro name="xm430_inertia">
+        <inertial>
+            <origin xyz="-4.0773796e-3 -1.5304911e-2 -1.6871895e-2" rpy="0 0 0"/>
+            <mass value="0.082"/>
+            <inertia ixx="2.3729564e-5" ixy="-1.3079758e-7" 
+                    ixz="-8.1403365e-8" iyy="1.3112295e-5" 
+                    iyz="-1.9659314e-6" izz="2.0942871e-5"/>
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="base_motor_frame_inertia">
+        <inertial>
+            <origin xyz="6.48e-08 -0.0015864406 0.0250889877" rpy="0 0 0"/>
+            <mass value="0.0768049156"/>
+            <inertia ixx="5.65659e-05" iyy="5.30145e-05"
+                izz="3.40217e-05" ixy="-0.0"
+                iyz="1.1663e-06" ixz="1e-10"/>
+        </inertial>    
+    </xacro:macro>
+
+    <xacro:macro name="dual_servo_shell_inertia">
+        <inertial>
+            <origin xyz="0.0005322566 -0.0003161331 0.0506920676" rpy="0 0 0"/>
+            <mass value="0.0258069457"/>
+            <inertia ixx="4.11451e-05" iyy="4.42386e-05"
+                izz="4.8477e-06" ixy="7.82e-08"
+                iyz="2.774e-07" ixz="-7.721e-07"/>
+        </inertial> 
+    </xacro:macro>
+
+    <xacro:macro name="dual_servo_transmission_inertia">
+        <inertial>
+            <origin xyz="-1.41e-08 0.0095354556 0.0141401617" rpy="0 0 0"/>
+            <mass value="0.0576887165"/>
+            <inertia ixx="2.78223e-05" iyy="1.35978e-05"
+                izz="2.50167e-05" ixy="5.7e-09"
+                iyz="4.5419e-06" ixz="-0.0"/>
+        </inertial> 
+    </xacro:macro>
+
+    <xacro:macro name="link1_inertia">
+        <inertial>
+            <origin xyz="0.0024455616 -0.0613330624 -0.0010832509" rpy="0 0 0"/>
+            <mass value="0.0299338616"/>
+            <inertia ixx="5.2023e-05" iyy="1.979e-06"
+                izz="5.17237e-05" ixy="2.0911e-06"
+                iyz="-5.3953e-06" ixz="4.522e-07"/>
+        </inertial> 
+    </xacro:macro>
+
+    <xacro:macro name="link2_inertia">
+        <inertial>
+            <origin xyz="0.0018980449 -0.0447345749 0.0044846887" rpy="0 0 0"/>
+            <mass value="0.0182756626"/>
+            <inertia ixx="2.49722e-05" iyy="6.156e-07"
+                izz="2.51424e-05" ixy="1.1778e-06"
+                iyz="-7.091e-07" ixz="1.039e-07"/>
+        </inertial> 
+    </xacro:macro>
+
+    <xacro:macro name="link2_right_inertia">
+        <inertial>
+            <origin xyz="-0.0023861897 -0.0533785446 -0.0003074935" rpy="0 0 0"/>
+            <mass value="0.0217645905"/>
+            <inertia ixx="3.57112e-05" iyy="1.2113e-06"
+                izz="3.54138e-05" ixy="-1.7195e-06"
+                iyz="-4.186e-06" ixz="-1.471e-07"/>
+        </inertial> 
+    </xacro:macro>
+
+    <xacro:macro name="link3_inertia">
+        <inertial>
+            <origin xyz="0.002386501 -0.0533785592 -0.0003073645" rpy="0 0 0"/>
+            <mass value="0.0217645964"/>
+            <inertia ixx="3.57111e-05" iyy="1.2113e-06"
+                izz="3.54138e-05" ixy="1.7199e-06"
+                iyz="-4.1867e-06" ixz="1.471e-07"/>
+        </inertial> 
+    </xacro:macro>
+
+    <xacro:macro name="link3_right_inertia">
+        <inertial>
+            <origin xyz="-0.0018978282 -0.0447345749 0.0044846887" rpy="0 0 0"/>
+            <mass value="0.0182756626"/>
+            <inertia ixx="2.49722e-05" iyy="6.156e-07"
+                izz="2.51424e-05" ixy="-1.1767e-06"
+                iyz="-7.091e-07" ixz="-1.039e-07"/>
+        </inertial> 
+    </xacro:macro>
+
+    <xacro:macro name="link4_inertia">
+        <inertial>
+            <origin xyz="-0.0026422902 -0.067590774 -0.0033849791" rpy="0 0 0"/>
+            <mass value="0.0275608119"/>
+            <inertia ixx="3.84633e-05" iyy="1.4218e-06"
+                izz="3.88256e-05" ixy="-1.6444e-06"
+                iyz="4.345e-07" ixz="-2.013e-07"/>
+        </inertial> 
+    </xacro:macro>
+    
+    <xacro:macro name="tip_bearings_inertia">
+        <inertial>
+            <origin xyz="0.0 -0.0 0.0053378354" rpy="0 0 0"/>
+            <mass value="0.0102057874"/>
+            <inertia ixx="6.785e-07" iyy="6.785e-07"
+                izz="9.84e-08" ixy="0.0"
+                iyz="0.0" ixz="0.0"/>
+        </inertial> 
+    </xacro:macro>
+
+    <!--Parts-->
+    <xacro:macro name="xm430" params="module_prefix motor_index">
+        <link name="${module_prefix}-xm430_${motor_index}">
+            <xacro:xm430_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/general/XM430-visual.obj" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/general/XM430-simplified.stl" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+    
+    <xacro:macro name="base_motor_frame" params="module_prefix">
+        <link name="${module_prefix}-base_motor_frame">
+            <xacro:base_motor_frame_inertia/>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/general/base_motor_frame_simplified.stl" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/general/base_motor_frame_simplified.stl" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="dual_servo_shell" params="module_prefix">
+        <link name="${module_prefix}-dual_servo_shell">
+            <xacro:dual_servo_shell_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/general/dual_servo_shell_simplified.stl" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/general/dual_servo_shell_simplified.stl" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+    
+    <xacro:macro name="dual_servo_transmission" params="module_prefix">
+        <link name="${module_prefix}-dual_servo_transmission">
+            <xacro:dual_servo_transmission_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/general/dual_servo_transmission_simplified.obj" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/general/dual_servo_transmission_simplified.obj" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link> 
+    </xacro:macro>
+
+    <xacro:macro name="link1" params="module_prefix">
+        <link name="${module_prefix}-link1">
+            <xacro:link1_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/${link_type}/link1.obj" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/${link_type}/link1.obj" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link2" params="module_prefix">
+        <link name="${module_prefix}-link2">
+            <xacro:link2_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/${link_type}/link2.obj" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/${link_type}/link2.obj" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link2_right" params="module_prefix">
+        <link name="${module_prefix}-link2_right">
+            <xacro:link2_right_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/${link_type}/link2_right.obj" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/${link_type}/link2_right.obj" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link3" params="module_prefix">
+        <link name="${module_prefix}-link3">
+            <xacro:link3_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/${link_type}/link3.obj" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/${link_type}/link3.obj" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link3_right" params="module_prefix">
+        <link name="${module_prefix}-link3_right">
+            <xacro:link3_right_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/${link_type}/link3_right.obj" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/${link_type}/link3_right.obj" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link4" params="module_prefix">
+        <link name="${module_prefix}-link4">
+            <xacro:link4_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/${link_type}/link4.obj" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/${link_type}/link4.obj" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link> 
+    </xacro:macro>
+    
+    <xacro:macro name="tip_bearings" params="module_prefix">
+        <link name="${module_prefix}-tip_bearings">
+            <xacro:tip_bearings_inertia/>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/visual/${link_type}/tip_bearings.obj" scale="${scale}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <mesh filename="${root_folder}/mesh/collision/${link_type}/tip_bearings.obj" scale="${scale}"/>
+                </geometry>
+            </collision>
+        </link> 
+    </xacro:macro>
+
+</robot>
