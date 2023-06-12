@@ -22,15 +22,33 @@ In the manipulation task, the robot with the same configuration is inverted with
 
 ## Transferring Learned Policies between Locomotion and Manipulation
 
+In this setup, locomotion and manipulation are trained separated simulation environments. The performace of locomotion/manipulation trained from scratch and transferred from another task is shown below:
+
 ![transfer_learning_result](assets/transfer_learning_result.png)
 
-Trained Agents with Horizontal Robot Configuration:
+- Trained agents with horizontal robot configuration:
 
-![horizontal_training_result](assets/horizontal_transfer_learning.gif) 
+  ![horizontal_training_result](assets/horizontal_transfer_learning.gif) 
 
-Trained Agents with Vertical Robot Configuration:
+- Trained agents with vertical robot configuration:
 
-![vertical_training_result](assets/vertical_transfer_learning.gif)
+  ![vertical_training_result](assets/vertical_transfer_learning.gif)
 
 ## Co-training Locomotion and Manipulation in a Single Simualtion Environment
 
+In this setup, locomotion and manipulation with the same configuration are trained in a single environment, to learn a unified loco-manipulation policy. The performance of the loco-manipulation task of two robot configurations are shown below:
+
+- Trained agents with horizontal robot configuration: 
+
+- Trained agents with vertical robot configuration:
+
+# Sim2Real Transferability
+
+## Sim2Real Transfer Demo:
+
+We found smoother motion of the robot and lower sim2real gap using position PD controller in Isaac Sim and on the physical robot. We test the sim2real transferability using position controller and replay joint position commands from the simulation to the physical robot.d
+
+- Locomotion (horizontal configuration):
+
+- Manipulation (horizontal configuration):
+  Coming soon...
