@@ -22,10 +22,15 @@ In the manipulation task, the robot with the same configuration is inverted with
 
 ## Transferring Learned Policies between Locomotion and Manipulation
 
-Horizontal Robot Configuration:
-![horizontal_transfer_learning](assets/vertical_transfer.mp4)
 
-Vertical Robot Configuration:
+Trained Agents with Horizontal Robot Configuration:
+
+https://github.com/bionicdl-sustech/LocoManipulationRL/assets/32815188/88066aa1-d061-4811-b170-c25f9f235ef7
+
+Trained Agents with Vertical Robot Configuration:
+
+https://github.com/bionicdl-sustech/LocoManipulationRL/assets/32815188/29706c8e-f02e-46e8-8761-b423144e6c9d
+
 
 
 ## Co-training Locomotion and Manipulation in a Single Simualtion Environment
