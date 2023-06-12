@@ -38,17 +38,25 @@ In this setup, locomotion and manipulation are trained separated simulation envi
 
 In this setup, locomotion and manipulation with the same configuration are trained in a single environment, to learn a unified loco-manipulation policy. The performance of the loco-manipulation task of two robot configurations are shown below:
 
-- Trained agents with horizontal robot configuration: 
+![co_learning_result](assets/cotrain_result.png)
+
+- Trained agents with horizontal robot configuration (left: MLP Policy; Right: GNN Policy): 
+
+  <img src="assets/horizontal_cotrain.gif" height="400" /> <img src="assets/horizontal_cotrain_graph.gif" height="400" />
 
 - Trained agents with vertical robot configuration:
+
+  <img src="assets/vertical_cotrain.gif" height="500" /> <img src="assets/vertical_cotrain_graph.gif" height="500" />
 
 # Sim2Real Transferability
 
 ## Sim2Real Transfer Demo:
 
-We found smoother motion of the robot and lower sim2real gap using position PD controller in Isaac Sim and on the physical robot. We test the sim2real transferability using position controller and replay joint position commands from the simulation to the physical robot.d
+We found smoother motion of the robot and lower sim2real gap using position PD controller in Isaac Sim and on the physical robot. We test the sim2real transferability using position controller and replay joint position commands from the simulation to the physical robot.
 
 - Locomotion (horizontal configuration):
+
+  https://github.com/bionicdl-sustech/LocoManipulationRL/assets/32815188/a3958df4-ce32-441b-996c-937cb71617cf
 
 - Manipulation (horizontal configuration):
   Coming soon...
