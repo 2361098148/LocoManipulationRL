@@ -23,7 +23,7 @@ In the manipulation task, the robot with the same configuration is inverted with
 ## Transferring Learned Policies between Locomotion and Manipulation
 
 Horizontal Robot Configuration:
-![horizontal_transfer_learning](assets/horizontal_transfer_learning_training_result.mp4)
+![horizontal_transfer_learning](assets/vertical_transfer.mp4)
 
 Vertical Robot Configuration:
 
