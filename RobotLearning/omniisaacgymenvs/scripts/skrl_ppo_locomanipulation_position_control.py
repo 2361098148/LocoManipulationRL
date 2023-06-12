@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from graph_model_orebot_ov import GraphNet, Action_Layer, Value_Layer
 
 # Import the skrl components to build the RL system
 from skrl.models.torch import Model, GaussianMixin, DeterministicMixin
@@ -12,6 +13,7 @@ from skrl.envs.torch import wrap_env
 from skrl.envs.torch import load_omniverse_isaacgym_env
 from skrl.utils import set_seed
 
+use_graph = False
 
 # set the seed for reproducibility
 set_seed(42, deterministic=True)
@@ -27,17 +29,24 @@ class Shared(GaussianMixin, DeterministicMixin, Model):
         GaussianMixin.__init__(self, clip_actions, clip_log_std, min_log_std, max_log_std, reduction)
         DeterministicMixin.__init__(self, clip_actions)
 
-        self.net = nn.Sequential(nn.Linear(self.num_observations, 256),
-                                 nn.ELU(),
-                                 nn.Linear(256, 128),
-                                 nn.ELU(),
-                                 nn.Linear(128, 64),
-                                 nn.ELU())
+        if not use_graph:
+            self.net = nn.Sequential(nn.Linear(self.num_observations, 256),
+                                     nn.ELU(),
+                                     nn.Linear(256, 128),
+                                     nn.ELU(),
+                                     nn.Linear(128, 64),
+                                     nn.ELU())
 
-        self.mean_layer = nn.Linear(64, self.num_actions)
-        self.log_std_parameter = nn.Parameter(torch.zeros(self.num_actions))
+            self.mean_layer = nn.Linear(64, self.num_actions)
+            self.log_std_parameter = nn.Parameter(torch.zeros(self.num_actions))
+            self.value_layer = nn.Linear(64, 1)
 
-        self.value_layer = nn.Linear(64, 1)
+        else:
+            self.net = GraphNet(hidden_features=32, out_features=32)
+
+            self.mean_layer = Action_Layer(hidden_features=32, num_actions=self.num_actions)
+            self.log_std_parameter = nn.Parameter(torch.zeros(self.num_actions))
+            self.value_layer = Value_Layer(hidden_features=32)
 
     def act(self, inputs, role):
         if role == "policy":
