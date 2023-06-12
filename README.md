@@ -46,7 +46,7 @@ In this setup, locomotion and manipulation with the same configuration are train
 
 - Trained agents with vertical robot configuration:
 
-  <img src="assets/vertical_cotrain.gif" height="300" /> <img src="assets/vertical_cotrain_graph.gif" height="300" />
+  <img src="assets/vertical_cotrain_cut.gif" height="300" /> <img src="assets/vertical_cotrain_graph.gif" height="300" />
 
 # Sim2Real Transferability
 
